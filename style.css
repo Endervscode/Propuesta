@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #2c003e, #1a001f, #000000);
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: white;
+}
+
+/* Contenedor principal */
+.stack-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 90vh;
+  z-index: 10; /* para que quede encima de corazones */
+}
+
+/* Tarjetas */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 50px;
+  width: 90%;
+  max-width: 700px;
+  min-height: 30vh;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  text-align: center;
+  transition: all 0.8s ease;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flowers {
+  margin-top: 30px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.flowers img {
+  max-width: 220px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  animation: sway 3s ease-in-out infinite;
+}
+
+/* 🌟 Efecto suave de aparición */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🌿 Efecto balanceo */
+@keyframes sway {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.card.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 10;
+}
+
+.card.prev {
+  opacity: 0;
+  transform: translate(-50%, -60%) scale(0.8);
+  z-index: 5;
+}
+
+.card.next {
+  opacity: 0;
+  transform: translate(-50%, -40%) scale(1.1);
+  z-index: 1;
+}
+
+.card h2 {
+  color: #e91e63;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+}
+
+.card p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* Botones */
+button {
+  margin: 15px;
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.yes {
+  background: #e91e63;
+  color: white;
+}
+
+.no {
+  background: #ccc;
+}
+
+/* Corazones flotantes */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  color: #ff4d6d;
+  font-size: 20px;
+  animation: floatUp 6s linear forwards;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Progreso (puntitos) */
+.progress {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+}
+
+.progress span {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.4;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.progress span.active {
+  opacity: 1;
+  background: #e91e63;
+  transform: scale(1.2);
+}
+
+/* Adaptación móvil */
+@media (max-width: 600px) {
+  .card h2 { font-size: 1.6rem; }
+  .card p { font-size: 1rem; }
+}
